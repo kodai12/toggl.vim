@@ -11,7 +11,7 @@ function! s:parse_args(args) abort
         \ "tags": [],
         \ "args": [],
         \ }
-  for s in result.words 
+  for s in result.words
     if s[0] == "+"
       let result.project = s[1:]
     elseif s[0] == "@"
@@ -105,17 +105,17 @@ function! toggl#task_cache_update() abort
     return
   endif
   call s:save_settings(now.description, now.duration)
-  let time = toggl#get_time(localtime() + s:load_settings()["time"])
+  let time = toggl#get_time(localtime() + load_settings()["time"])
   echo now.description . ' ' . time
 endfunction
 
 function! toggl#task() abort
-  return s:load_settings()["task"]
+  return load_settings()["task"]
 endfunction
 
 function! toggl#time() abort
-  let time = toggl#get_time(localtime() + s:load_settings()["time"])
-  if s:load_settings()["time"] == 0
+  let time = toggl#get_time(localtime() + load_settings()["time"])
+  if load_settings()["time"] == 0
     let time = ''
   endif
   return time
@@ -150,7 +150,7 @@ function! s:save_settings(task, time)
   call writefile([string(config)], s:configfile)
 endfunction
 
-function! s:load_settings()
+function! load_settings()
   if filereadable(s:configfile)
     silent! sandbox let config = eval(join(readfile(s:configfile), ''))
     return config
