@@ -14,9 +14,9 @@ if !exists("g:toggl_api_token")
   echoerr "API token for Toggl is not set"
 endif
 
-let s:settings = {
+let g:api_settings = {
       \ 'username' : g:toggl_api_token,
-      \ 'password' : 'api_token',
+      " \ 'password' : 'api_token',
       \ 'client' : ["curl"],
       \ 'authMethod' : "basic",
       \ }
@@ -32,7 +32,7 @@ endfunction
 
 function! toggl#auth#get(rest, param) abort
   let url = s:toggl_url_base . a:rest
-  let l:setting = deepcopy(s:settings)
+  let l:setting = deepcopy(g:api_settings)
   let l:setting.url = url
   let l:setting.method = "GET"
   let l:setting.param = a:param
@@ -41,7 +41,7 @@ endfunction
 
 function! toggl#auth#put(rest, data) abort
   let url = s:toggl_url_base . a:rest
-  let l:setting = deepcopy(s:settings)
+  let l:setting = deepcopy(g:api_settings)
   let l:setting.url = url
   let l:setting.method = "PUT"
   let l:setting.data = s:json.encode(a:data)
@@ -51,7 +51,7 @@ endfunction
 
 function! toggl#auth#post(rest, data) abort
   let url = s:toggl_url_base . a:rest
-  let l:setting = deepcopy(s:settings)
+  let l:setting = deepcopy(g:api_settings)
   let l:setting.url = url
   let l:setting.method = "POST"
   let l:setting.data = s:json.encode(a:data)
