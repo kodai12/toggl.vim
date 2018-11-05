@@ -105,17 +105,17 @@ function! toggl#task_cache_update() abort
     return
   endif
   call s:save_settings(now.description, now.duration)
-  let time = toggl#get_time(localtime() + g:load_toggl_settings()["time"])
+  let time = toggl#get_time(localtime() + toggl#load_settings()["time"])
   echo now.description . ' ' . time
 endfunction
 
 function! toggl#task() abort
-  return g:load_toggl_settings()["task"]
+  return toggl#load_settings()["task"]
 endfunction
 
 function! toggl#time() abort
-  let time = toggl#get_time(localtime() + g:load_toggl_settings()["time"])
-  if g:load_toggl_settings()["time"] == 0
+  let time = toggl#get_time(localtime() + toggl#load_settings()["time"])
+  if toggl#load_settings()["time"] == 0
     let time = ''
   endif
   return time
@@ -150,7 +150,7 @@ function! s:save_settings(task, time)
   call writefile([string(config)], s:configfile)
 endfunction
 
-function! g:load_toggl_settings()
+function! toggl#load_settings() abort
   if filereadable(s:configfile)
     silent! sandbox let config = eval(join(readfile(s:configfile), ''))
     return config
