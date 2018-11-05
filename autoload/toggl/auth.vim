@@ -24,9 +24,9 @@ let g:api_settings = {
 function! s:call_api(setting) abort
   let result = s:http.request(a:setting)
   let g:toggl_debug_last_result = result
-  if result.success == 0
-    throw "Toggl.vim: Request Failed. Response Status is " . result.statusText
-  endif
+  " if result.success == 0
+  "   throw "Toggl.vim: Request Failed. Response Status is " . result.statusText
+  " endif
   return s:json.decode(result.content)
 endfunction
 
