@@ -110,7 +110,7 @@ function! toggl#task_cache_update() abort
 endfunction
 
 function! toggl#task() abort
-  return s:load_settings()["task"]
+  return "TASK: " . s:load_settings()["task"]
 endfunction
 
 function! toggl#time() abort
@@ -118,7 +118,7 @@ function! toggl#time() abort
   if s:load_settings()["time"] == 0
     let time = ''
   endif
-  return time
+  return "PROGRESS: " . time
 endfunction
 
 function! toggl#update_current(data) abort
