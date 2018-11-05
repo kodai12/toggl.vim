@@ -113,12 +113,24 @@ function! toggl#task() abort
   echo s:load_settings()["task"]
 endfunction
 
+function! toggl#task#print() abort
+  return s:load_settings()["task"]
+endfunction
+
 function! toggl#time() abort
   let time = toggl#get_time(localtime() + s:load_settings()["time"])
   if s:load_settings()["time"] == 0
     let time = ''
   endif
   echo time
+endfunction
+
+function! toggl#time#print() abort
+  let time = toggl#get_time(localtime() + s:load_settings()["time"])
+  if s:load_settings()["time"] == 0
+    let time = ''
+  endif
+  return time
 endfunction
 
 function! toggl#update_current(data) abort
