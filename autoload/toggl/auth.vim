@@ -16,7 +16,7 @@ endif
 
 let g:api_settings = {
       \ 'username' : g:toggl_api_token,
-      " \ 'password' : 'api_token',
+      \ 'password' : 'api_token',
       \ 'client' : ["curl"],
       \ 'authMethod' : "basic",
       \ }
